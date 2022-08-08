@@ -11,7 +11,7 @@ public class ConnectionUtil {
 	private static Connection connection;
 	
 	public static Connection getConnection() throws SQLException {
-		if(connection!=null) {
+		if(connection!=null && !connection.isClosed()) {
 			//Checking if there is a connection
 			return connection;
 		}else {

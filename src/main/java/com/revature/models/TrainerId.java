@@ -1,34 +1,51 @@
 package com.revature.models;
 
-public class Username {
+public class TrainerId {
 	
-	private String usersname;
+	private int trainerId;
 	private TrainerPersona trainerPersona;
 	private String region;
 	private String elementType;
 	
 	
-	public Username(String usersname, TrainerPersona trainerPersona, String region, String elementType) {
+	public TrainerId(int trainerId, TrainerPersona trainerPersona, String region, String elementType) {
 		super();
-		this.usersname = usersname;
+		this.trainerId = trainerId;
 		this.trainerPersona = trainerPersona;
 		this.region = region;
 		this.elementType = elementType;
 	}
 
 
-	public Username() {
+	public TrainerId(TrainerPersona trainerPersona, String region, String elementType) {
+		super();
+		this.trainerPersona = trainerPersona;
+		this.region = region;
+		this.elementType = elementType;
+	}
+	
+	
+
+	public TrainerId(int trainerId, String region, String elementType) {
+		super();
+		this.trainerId = trainerId;
+		this.region = region;
+		this.elementType = elementType;
+	}
+
+
+	public TrainerId() {
 		super();
 	}
 
 
-	public String getUsersname() {
-		return usersname;
+	public int getTrainerId() {
+		return trainerId;
 	}
 
 
-	public void setUsersname(String usersname) {
-		this.usersname = usersname;
+	public void setTrainerId(int trainerId) {
+		this.trainerId = trainerId;
 	}
 
 
@@ -68,8 +85,8 @@ public class Username {
 		int result = 1;
 		result = prime * result + ((elementType == null) ? 0 : elementType.hashCode());
 		result = prime * result + ((region == null) ? 0 : region.hashCode());
+		result = prime * result + trainerId;
 		result = prime * result + ((trainerPersona == null) ? 0 : trainerPersona.hashCode());
-		result = prime * result + ((usersname == null) ? 0 : usersname.hashCode());
 		return result;
 	}
 
@@ -82,7 +99,7 @@ public class Username {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Username other = (Username) obj;
+		TrainerId other = (TrainerId) obj;
 		if (elementType == null) {
 			if (other.elementType != null)
 				return false;
@@ -93,15 +110,12 @@ public class Username {
 				return false;
 		} else if (!region.equals(other.region))
 			return false;
+		if (trainerId != other.trainerId)
+			return false;
 		if (trainerPersona == null) {
 			if (other.trainerPersona != null)
 				return false;
 		} else if (!trainerPersona.equals(other.trainerPersona))
-			return false;
-		if (usersname == null) {
-			if (other.usersname != null)
-				return false;
-		} else if (!usersname.equals(other.usersname))
 			return false;
 		return true;
 	}
@@ -109,9 +123,10 @@ public class Username {
 
 	@Override
 	public String toString() {
-		return "Username [usersname=" + usersname + ", trainerPersona=" + trainerPersona + ", region=" + region
+		return "Trainerid [trainerId=" + trainerId + ", trainerPersona=" + trainerPersona + ", region=" + region
 				+ ", elementType=" + elementType + "]";
 	}
+	
 	
 	
 	

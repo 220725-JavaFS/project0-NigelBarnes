@@ -1,73 +1,92 @@
 package com.revature.models;
 
-public class Pokeuser {
+public class PokeUsers {
 	
-	private int trainerId;
-	private Username username;
+	private TrainerId trainerId;
+	private String username;
 	private int password;
 	private String accountType;
 	private double pokeDollars;
 	
-	public Pokeuser(int trainerId, Username username, int password, String accountType, double pokeDollars) {
+	
+	public PokeUsers(TrainerId trainerId, String username, int password, String accountType, double pokeDollars) {
 		super();
 		this.trainerId = trainerId;
+		this.username = username;
+		this.password = password;
+		this.accountType = accountType;
+		this.pokeDollars = pokeDollars;
+	}
+
+
+	public PokeUsers() {
+		super();
+	}
+
+
+	public PokeUsers(String username, int password, String accountType, double pokeDollars) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.accountType = accountType;
 		this.pokeDollars = pokeDollars;
 	}
 	
-	public Pokeuser(Username username, int password, String accountType, double pokeDollars) {
+	public PokeUsers(String username) {
 		super();
 		this.username = username;
-		this.password = password;
-		this.accountType = accountType;
-		this.pokeDollars = pokeDollars;
 	}
 
-	public Pokeuser() {
-		super();
-	}
 
-	public int getTrainerId() {
+	public TrainerId getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+
+	public void setTrainerId(TrainerId trainerId) {
 		this.trainerId = trainerId;
 	}
 
-	public Username getUsername() {
+
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(Username username) {
+
+	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 	public int getPassword() {
 		return password;
 	}
 
+
 	public void setPassword(int password) {
 		this.password = password;
 	}
+
 
 	public String getAccountType() {
 		return accountType;
 	}
 
+
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+
 
 	public double getPokeDollars() {
 		return pokeDollars;
 	}
 
+
 	public void setPokeDollars(double pokeDollars) {
 		this.pokeDollars = pokeDollars;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -78,10 +97,11 @@ public class Pokeuser {
 		long temp;
 		temp = Double.doubleToLongBits(pokeDollars);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + trainerId;
+		result = prime * result + ((trainerId == null) ? 0 : trainerId.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -91,7 +111,7 @@ public class Pokeuser {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pokeuser other = (Pokeuser) obj;
+		PokeUsers other = (PokeUsers) obj;
 		if (accountType == null) {
 			if (other.accountType != null)
 				return false;
@@ -101,7 +121,10 @@ public class Pokeuser {
 			return false;
 		if (Double.doubleToLongBits(pokeDollars) != Double.doubleToLongBits(other.pokeDollars))
 			return false;
-		if (trainerId != other.trainerId)
+		if (trainerId == null) {
+			if (other.trainerId != null)
+				return false;
+		} else if (!trainerId.equals(other.trainerId))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -111,11 +134,18 @@ public class Pokeuser {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Pokeuser [trainerId=" + trainerId + ", username=" + username + ", password=" + password
+		return "PokeUsers [trainerId=" + trainerId + ", username=" + username + ", password=" + password
 				+ ", accountType=" + accountType + ", pokeDollars=" + pokeDollars + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
