@@ -20,4 +20,5 @@ public interface PokeUsersDAO {
 	
 	public PokeUsers changePokeUsersPassword(String username, int password);
 	
-}
+	public PokeUsers changePokeDollarsByUsername(String username, double pokeDollars);
+}   

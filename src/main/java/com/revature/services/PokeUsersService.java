@@ -20,4 +20,5 @@ public class PokeUsersService {
 	public PokeUsers changeTrainerPasswordByUsername (String username, int password) {
 		return pokeusersDao.changePokeUsersPassword(username, password);
 	}
+
 }
