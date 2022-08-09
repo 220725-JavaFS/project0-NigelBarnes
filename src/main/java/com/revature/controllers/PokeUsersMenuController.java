@@ -8,6 +8,7 @@ import com.revature.services.PokeUsersService;
 public class PokeUsersMenuController {
 	
 	private PokeUsersService pokeUsersService = new PokeUsersService();
+	PokeLogin login = new PokeLogin();
     private Scanner scan = new Scanner(System.in);
 	
 	public void pokeuserMenu () {
@@ -20,10 +21,11 @@ public class PokeUsersMenuController {
 		 choice = scan.nextLine();
 		 switchChoice:
 		 switch (choice) {
-		 case "1":
-			 loginPokeUsers();
+		 case "1":  	 
+			  login.PokeUserLogin();
 		 break switchChoice;
 		 case "0": 			 
+			 System.exit(0);
 		 break switchChoice;
 		 default:
 			 System.out.println("Sorry trainer, that didn't really make any sense. I know you can do it though! Try again! ");
@@ -32,33 +34,9 @@ public class PokeUsersMenuController {
 		 
 		}
 				
-	}
-	
-	private void loginPokeUsers() {
-		String username ="";
-		int password;
-		String a = "";
-		while(username.equals("")&a.equals("")) {
-		System.out.println("Perfect! To get started I'm going to need you to login in! Can you please enter your username?"
-				+ "+ \nUsername: ");
-		 username = scan.next();
-		 System.out.println("What about your password?"
-		 		+ "\nPassword: ");
-		 a = scan.nextLine();
-		 password = a.hashCode();
-		 
-		 System.out.println(username + a);
-		 
-		 
-		}
+	  }
 		
-	}
+   }
 
-	public static void main (String[]args) {
-		
-		PokeUsersMenuController poke = new PokeUsersMenuController();
-		poke.pokeuserMenu();
-		
-		
-	}
-}
+
+

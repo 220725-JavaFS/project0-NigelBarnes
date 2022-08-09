@@ -8,9 +8,16 @@ public class PokeUsersService {
 	
 	private PokeUsersDAO pokeusersDao = new PokeusersDAOImpl();
 	
-	public PokeUsers getSinglePokeuser (String username) {
-		return pokeusersDao.getPokeuserByUsername(username);
+	
+	public PokeUsers loginUsers (String username, int password) {
+		return pokeusersDao.loginPokeUsers(username, password);
+	}
+
+	public PokeUsers seeSinglePokeDollarsByUsername (String username) {
+		return pokeusersDao.viewPokedollarsByPokeUsername(username);
 	}
 	
-
+	public PokeUsers changeTrainerPasswordByUsername (String username, int password) {
+		return pokeusersDao.changePokeUsersPassword(username, password);
+	}
 }

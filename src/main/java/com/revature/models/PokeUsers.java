@@ -2,21 +2,32 @@ package com.revature.models;
 
 public class PokeUsers {
 	
-	private TrainerId trainerId;
+	private int trainerId;
 	private String username;
 	private int password;
 	private String accountType;
 	private double pokeDollars;
+	private PokePersona pokePersona;
 	
 	
-	public PokeUsers(TrainerId trainerId, String username, int password, String accountType, double pokeDollars) {
+	public PokeUsers(int trainerId, String username, int password, String accountType, double pokeDollars,
+			PokePersona pokePersona) {
 		super();
 		this.trainerId = trainerId;
 		this.username = username;
 		this.password = password;
 		this.accountType = accountType;
 		this.pokeDollars = pokeDollars;
+		this.pokePersona = pokePersona;
 	}
+	
+	
+	public PokeUsers(double pokeDollars) {
+		super();
+		this.pokeDollars = pokeDollars;
+	}
+	
+	
 
 
 	public PokeUsers() {
@@ -24,26 +35,12 @@ public class PokeUsers {
 	}
 
 
-	public PokeUsers(String username, int password, String accountType, double pokeDollars) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.accountType = accountType;
-		this.pokeDollars = pokeDollars;
-	}
-	
-	public PokeUsers(String username) {
-		super();
-		this.username = username;
-	}
-
-
-	public TrainerId getTrainerId() {
+	public int getTrainerId() {
 		return trainerId;
 	}
 
 
-	public void setTrainerId(TrainerId trainerId) {
+	public void setTrainerId(int trainerId) {
 		this.trainerId = trainerId;
 	}
 
@@ -88,6 +85,16 @@ public class PokeUsers {
 	}
 
 
+	public PokePersona getPokePersona() {
+		return pokePersona;
+	}
+
+
+	public void setPokePersona(PokePersona pokePersona) {
+		this.pokePersona = pokePersona;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,7 +104,8 @@ public class PokeUsers {
 		long temp;
 		temp = Double.doubleToLongBits(pokeDollars);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((trainerId == null) ? 0 : trainerId.hashCode());
+		result = prime * result + ((pokePersona == null) ? 0 : pokePersona.hashCode());
+		result = prime * result + trainerId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -121,10 +129,12 @@ public class PokeUsers {
 			return false;
 		if (Double.doubleToLongBits(pokeDollars) != Double.doubleToLongBits(other.pokeDollars))
 			return false;
-		if (trainerId == null) {
-			if (other.trainerId != null)
+		if (pokePersona == null) {
+			if (other.pokePersona != null)
 				return false;
-		} else if (!trainerId.equals(other.trainerId))
+		} else if (!pokePersona.equals(other.pokePersona))
+			return false;
+		if (trainerId != other.trainerId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -138,8 +148,12 @@ public class PokeUsers {
 	@Override
 	public String toString() {
 		return "PokeUsers [trainerId=" + trainerId + ", username=" + username + ", password=" + password
-				+ ", accountType=" + accountType + ", pokeDollars=" + pokeDollars + "]";
+				+ ", accountType=" + accountType + ", pokeDollars=" + pokeDollars + ", pokePersona=" + pokePersona
+				+ "]";
 	}
+	
+	
+	
 	
 	
 	
