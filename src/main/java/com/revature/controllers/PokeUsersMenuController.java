@@ -75,6 +75,7 @@ public class PokeUsersMenuController {
 		case "3":
 			System.out.println("Do you mind entering the username of the user you would like to view?\n");
 			String username1 = scan.nextLine();
+			System.out.println("Here's the account information of the trainer you wanted to see!\n");
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
 			System.out.println("\n===============================================================\n");
@@ -120,8 +121,9 @@ public class PokeUsersMenuController {
 			System.out.println("\n======================================================================\n");
 			break;
 		case "3":
-			System.out.println("Do you mind entering your trainer Username again?\n");
+			System.out.println("Do you mind entering the trainer's username you would like to view?\n");
 			String username1 = scan.nextLine();
+			System.out.println("Perfect, here's the user info associated with the account!\n");
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
 			System.out.println("\n===============================================================\n");
@@ -138,7 +140,7 @@ public class PokeUsersMenuController {
 	}
 	
 	public void pokeTrainerMenu() {
-		System.out.println("\nWelcome trainer! Have a wonderful adventure! Here are things you can do"
+		System.out.println("\nHello young trainer! As a challenger, here's all the things you can do!"
 				+ "\n1. View your Pokemon."
 				+ "\n2. View account information."
 				+ "\n3. Logout.");
@@ -158,7 +160,7 @@ public class PokeUsersMenuController {
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
-			System.out.println("Perfect! You have just added the money to your account.");
+			System.out.println("Perfect! Here's the information listed within your account!");
 			System.out.println("\n===============================================================\n");
 			break;
 		case "3":

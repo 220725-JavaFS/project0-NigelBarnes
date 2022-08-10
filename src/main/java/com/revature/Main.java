@@ -8,7 +8,11 @@ public class Main {
 		
 		PokeUsersMenuController pokeUser = new PokeUsersMenuController();
 		
+		System.out.println("Your journey begins here.....loading...\n");
+		
 		pokeUser.pokeuserMenu();
+		
+		System.out.println("\nHope to see you again! Closing application now...");
   }
 
 }
