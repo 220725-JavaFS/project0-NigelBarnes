@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.models.PokeUsers;
+import com.revature.models.Pokemons;
 import com.revature.services.PokePersonaService;
 import com.revature.services.PokeUsersService;
 import com.revature.services.PokemonsService;
@@ -42,8 +44,8 @@ public class PokeUsersMenuController {
 	  }
 	
 	public void gymLeaderMenu() {
-    	System.out.println("\nWelcome back to your gym, Gym Leader! Your Pokemon have missed you dearly! If you have forgotten what you are allowed to do, here are your options: "
-       			+ "\n1. Give a Pokemon Trainer PokeDollars from your own account."
+    	System.out.println("\nWelcome back Gym Leader! Your Pokemon have missed you dearly! If you have forgotten what you are allowed to do, here are your options: "
+       			+ "\n1. Give a Pokemon Trainer PokeDollars."
     			+ "\n2. View a Pokemon Trainer's PokeDollars."
     			+ "\n3. View account information."
     			+ "\n4. Logout.");
@@ -53,17 +55,25 @@ public class PokeUsersMenuController {
     	switch(gymLeaderAnswer) {
     	
     	case "1": 
+    		System.out.println("Please enter the username of the trainer you would like to give the PokeDollars to below!\n");
+            String username3 = scan.nextLine();
+            System.out.println("Now can you enter the amount of PokeDollars you would like to give them?\n");
+            double answer = Double.parseDouble(scan.nextLine());
+      
+            System.out.println("\n==========================SUCCESS=====================================\n");
+            pokeUsersService.depositPokeDollarsIntoAccount(username3, answer);
+            System.out.println("\n==========================SUCCESS=====================================\n");
 			break;
 		case "2":
 			System.out.println("Perfect! In order to see their PokeDollars can you please provide the trainer's username?\n");
-			String answer = scan.nextLine();
+			String answer1 = scan.nextLine();
 			System.out.println("\n==========================SUCCESS=====================================\n");
 			System.out.print("Here's the PokeDollars listed in their account: ");
-			pokeUsersService.seeSinglePokeDollarsByUsername(answer);
+			pokeUsersService.seeSinglePokeDollarsByUsername(answer1);
 			System.out.println("\n======================================================================\n");
 			break;	
 		case "3":
-			System.out.println("Do you mind entering your Poke Username again?\n");
+			System.out.println("Do you mind entering the username of the user you would like to view?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
@@ -83,20 +93,22 @@ public class PokeUsersMenuController {
 	public void eliteFourMenu() {
 		System.out.println("\nWelcome Elite Four member! You've come a long way in your journey, but you're not quite at the top yet! Here's what you can do: "
 				+"\n1. View all Pokemon from all trainers!"
-				+"\n2. View all trainer PokeDollars."
-				+"\n3. Change trainer's password."
-				+"\n4. View account information."
-				+"\n5. Logout.");
+				+"\n2. Change trainer's password."
+				+"\n3. View account information."
+				+"\n4. Logout.");
 		
 		String eliteFourAnswer = scan.nextLine();
 		
 		switch (eliteFourAnswer) {
 		
 		case "1": 
+			System.out.println("Here's every Trainer Persona and their cauught Pokemon:\n");
+			List<Pokemons> pokemonsList = pokemonsService.catchEmAll();
+			for (Pokemons a: pokemonsList) {
+				System.out.println(a);
+			}
 			break;
-		case "2":
-			break;
-		case "3": 
+		case "2": 
 			System.out.println("Please type the username of the Trainer who's password you're about to change!");
 			String username = scan.nextLine();
 			System.out.println("What would you like to change the Trainer's password to?");
@@ -107,14 +119,14 @@ public class PokeUsersMenuController {
 			System.out.println("\nGotcha! "+username+"'s password has been changed to "+answer+"!\n");
 			System.out.println("\n======================================================================\n");
 			break;
-		case "4":
+		case "3":
 			System.out.println("Do you mind entering your trainer Username again?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
 			System.out.println("\n===============================================================\n");
 			break;
-		case "5":
+		case "4":
 			System.out.println("Alright, logging you out! Have a great day Elite Four member! Hope to see you again!\n");
 			pokeuserMenu();
 			
@@ -128,9 +140,8 @@ public class PokeUsersMenuController {
 	public void pokeTrainerMenu() {
 		System.out.println("\nWelcome trainer! Have a wonderful adventure! Here are things you can do"
 				+ "\n1. View your Pokemon."
-				+ "\n2. Deposit some PokeDollars into your account."
-				+ "\n3. View account information."
-				+ "\n4. Logout.");
+				+ "\n2. View account information."
+				+ "\n3. Logout.");
 		
 		String pokeTrainerAnswer = scan.nextLine();
 		
@@ -141,18 +152,8 @@ public class PokeUsersMenuController {
 			System.out.println("\n==========================SUCCESS=====================================\n");
 			pokemonsService.getPokemonWithPokemonPersona(pokePersona);
 			System.out.println("\n==========================SUCCESS=====================================\n");
-			break;
+			break;   
 		case "2":
-            System.out.println("Please enter your username below!");
-            String username3 = scan.nextLine();
-            System.out.println("Now can you enter the amount of PokeDollars you would like to deposit?");
-            double answer = Double.parseDouble(scan.nextLine());
-      
-            System.out.println("\n==========================SUCCESS=====================================\n");
-            pokeUsersService.depositPokeDollarsIntoAccount(username3, answer);
-            System.out.println("\n==========================SUCCESS=====================================\n");
-			break;
-		case "3":
 			System.out.println("Do you mind entering your Poke Username again?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
@@ -160,7 +161,7 @@ public class PokeUsersMenuController {
 			System.out.println("Perfect! You have just added the money to your account.");
 			System.out.println("\n===============================================================\n");
 			break;
-		case "4":
+		case "3":
 			pokeuserMenu();
 			break;
 		default:
@@ -172,27 +173,29 @@ public class PokeUsersMenuController {
 	public void championMenu () {
 		System.out.println("\nWelcome Champion! As the leader of your region, you have the ability perform a variety of tasks! Please select an option from below: "
 				+"\n1. Print all Pokemon Trainers!"	
-				+"\n2. View all pokemon from all trainers!"
-				+"\n3. View account information."
-				+"\n4. Change a Trainer's password."
-				+"\n5. Logout");
+				+"\n2. View account information."
+				+"\n3. Change a Trainer's password."
+				+"\n4. Logout");
 		
 		String championAnswer = scan.nextLine();
 		
 		switch (championAnswer) {
 		
 		case "1":
+			System.out.println("Here's every Trainer Persona and their cauught Pokemon:\n");
+			List<Pokemons> pokemonsList = pokemonsService.catchEmAll();
+			for (Pokemons a: pokemonsList) {
+				System.out.println(a);
+			}
 			break;
 		case "2":
-			break;
-		case "3":
 			System.out.println("Do you mind entering your Poke Username again?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
 			System.out.println("\n===============================================================\n");
 			break;
-		case "4":
+		case "3":
 			System.out.println("Please type the username of the Trainer who's password you're about to change!");
 			String username = scan.nextLine();
 			System.out.println("What would you like to change the Trainer's password to?");
@@ -203,7 +206,7 @@ public class PokeUsersMenuController {
 			System.out.println("\nGotcha! "+username+"'s password has been changed to "+answer+"!\n");
 			System.out.println("\n======================================================================\n");
 			break;
-		case "5":
+		case "4":
 			System.out.println("See you next time Champion!\n");
 			 pokeuserMenu();
 			 
@@ -255,7 +258,7 @@ public class PokeUsersMenuController {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("\nHmmm I can't seem to find you. Are you sure you're a true trainer?\n");
+			System.out.println("\nHmmm I can't seem to find you. Are you sure you're a true Pokemon trainer?\n");
 			pokeuserMenu();
 			}
 
