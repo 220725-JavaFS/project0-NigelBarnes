@@ -30,7 +30,7 @@ public class PokeUsersService {
 	}
 	
 	public PokeUsers depositPokeDollarsIntoAccount (String username, double deposit) {
-		return pokeusersDao.depositPokeDollarsByUsername(username, 0);
+		return pokeusersDao.depositPokeDollarsByUsername(username, deposit);
 	}
 	
 
