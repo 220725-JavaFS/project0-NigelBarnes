@@ -18,7 +18,7 @@ public interface PokeUsersDAO {
 	
 	public PokeUsers changePokeDollarsByUsername(String username, double pokeDollars);
 	
-	public void depositPokeDollarsByUsername(String username, double deposit);
+	public PokeUsers depositPokeDollarsByUsername(String username, double deposit);
 	
 	public String getTrainerTypeByUsername(String username);
 	

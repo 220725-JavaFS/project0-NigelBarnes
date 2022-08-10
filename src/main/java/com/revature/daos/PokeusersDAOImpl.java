@@ -222,7 +222,7 @@ public class PokeusersDAOImpl implements PokeUsersDAO{
 
 
 	@Override
-	public void depositPokeDollarsByUsername(String username, double deposit) {
+	public PokeUsers depositPokeDollarsByUsername(String username, double deposit) {
 		try (Connection conn = ConnectionUtil.getConnection()){
 			
 			 String sq1 = "SELECT * FROM pokeusers WHERE user_name = ?;";
@@ -254,6 +254,7 @@ public class PokeusersDAOImpl implements PokeUsersDAO{
 		  }catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 

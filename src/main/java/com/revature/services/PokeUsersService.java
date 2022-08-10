@@ -29,5 +29,9 @@ public class PokeUsersService {
 		return pokeusersDao.getPokeUserbyUsername(username);
 	}
 	
+	public PokeUsers depositPokeDollarsIntoAccount (String username, double deposit) {
+		return pokeusersDao.depositPokeDollarsByUsername(username, 0);
+	}
+	
 
 }

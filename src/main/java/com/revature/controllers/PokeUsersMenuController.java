@@ -3,11 +3,15 @@ package com.revature.controllers;
 import java.util.Scanner;
 
 import com.revature.models.PokeUsers;
+import com.revature.services.PokePersonaService;
 import com.revature.services.PokeUsersService;
+import com.revature.services.PokemonsService;
 
 public class PokeUsersMenuController {
 	
 	private PokeUsersService pokeUsersService = new PokeUsersService();
+	private PokemonsService pokemonsService = new PokemonsService();
+	private PokePersonaService pokePersonaService = new PokePersonaService();
     private Scanner scan = new Scanner(System.in);
 	private Scanner userUsername = new Scanner(System.in);
 	private Scanner userPassword = new Scanner(System.in);
@@ -104,7 +108,7 @@ public class PokeUsersMenuController {
 			System.out.println("\n======================================================================\n");
 			break;
 		case "4":
-			System.out.println("Do you mind entering your Poke Username again?\n");
+			System.out.println("Do you mind entering your trainer Username again?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
@@ -124,10 +128,9 @@ public class PokeUsersMenuController {
 	public void pokeTrainerMenu() {
 		System.out.println("\nWelcome trainer! Have a wonderful adventure! Here are things you can do"
 				+ "\n1. View your Pokemon."
-				+ "\n2. Give another trainer some of your PokeDollars."
-				+ "\n3. Recieve some PokeDollars from another trainer."
-				+ "\n4. View account information."
-				+ "\n5. Logout");
+				+ "\n2. Deposit some PokeDollars into your account."
+				+ "\n3. View account information."
+				+ "\n4. Logout.");
 		
 		String pokeTrainerAnswer = scan.nextLine();
 		
@@ -135,21 +138,29 @@ public class PokeUsersMenuController {
 		case "1":
 			System.out.println("Please enter your Pokemon Persona:");
 			String pokePersona = scan.nextLine();
-			//pokeUsersService.getPokemonWithPokemonPersona(pokePersona);
-			
+			System.out.println("\n==========================SUCCESS=====================================\n");
+			pokemonsService.getPokemonWithPokemonPersona(pokePersona);
+			System.out.println("\n==========================SUCCESS=====================================\n");
 			break;
 		case "2":
+            System.out.println("Please enter your username below!");
+            String username3 = scan.nextLine();
+            System.out.println("Now can you enter the amount of PokeDollars you would like to deposit?");
+            double answer = Double.parseDouble(scan.nextLine());
+      
+            System.out.println("\n==========================SUCCESS=====================================\n");
+            pokeUsersService.depositPokeDollarsIntoAccount(username3, answer);
+            System.out.println("\n==========================SUCCESS=====================================\n");
 			break;
 		case "3":
-			break;
-		case "4":
 			System.out.println("Do you mind entering your Poke Username again?\n");
 			String username1 = scan.nextLine();
 			System.out.println("\n===============================================================\n");
 			pokeUsersService.getAccountInfoByUsername(username1);
+			System.out.println("Perfect! You have just added the money to your account.");
 			System.out.println("\n===============================================================\n");
 			break;
-		case "5":
+		case "4":
 			pokeuserMenu();
 			break;
 		default:
