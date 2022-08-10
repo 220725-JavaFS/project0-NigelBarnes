@@ -6,7 +6,7 @@ public class PokePersonaDAOImpl implements PokePersonaDAO{
 
 	@Override
 	public PokePersona getPersonaTypeByPersona(String pokePersona) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

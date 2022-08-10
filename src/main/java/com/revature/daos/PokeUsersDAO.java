@@ -11,14 +11,17 @@ public interface PokeUsersDAO {
 	List<PokeUsers> getAllPokeUsers();
 	
 	public PokeUsers loginPokeUsers(String username, int password);
-	
-	public PokeUsers depositPokedollarsByTrainerId(double pokeDollars, int TrainerId);
 
 	public PokeUsers viewPokedollarsByPokeUsername(String username);
-	
-//	public PokeUsers getPokeUsersAccountType(String username);
 	
 	public PokeUsers changePokeUsersPassword(String username, int password);
 	
 	public PokeUsers changePokeDollarsByUsername(String username, double pokeDollars);
+	
+	public void depositPokeDollarsByUsername(String username, double deposit);
+	
+	public String getTrainerTypeByUsername(String username);
+	
+	public PokeUsers getPokeUserbyUsername (String username);
+	
 }   

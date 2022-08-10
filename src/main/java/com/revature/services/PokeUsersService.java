@@ -21,4 +21,13 @@ public class PokeUsersService {
 		return pokeusersDao.changePokeUsersPassword(username, password);
 	}
 
+	public String getAccountType (String username) {
+		return pokeusersDao.getTrainerTypeByUsername(username);
+	}
+	
+	public PokeUsers getAccountInfoByUsername (String username) {
+		return pokeusersDao.getPokeUserbyUsername(username);
+	}
+	
+
 }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.revature.models.PokeUsers;
 import com.revature.services.PokeUsersService;
+import com.revature.models.*;
 
 public class PokeLogin {
 	
@@ -11,6 +12,10 @@ public class PokeLogin {
 		private Scanner scan = new Scanner(System.in);
 		private Scanner userUsername = new Scanner(System.in);
 		private Scanner userPassword = new Scanner(System.in);
+//     	private EliteFour eliteFour = new EliteFour();
+//		private Champion champion = new Champion();
+//		private PokeTrainer pokeTrainer = new PokeTrainer();
+//		private GymLeader gymLeader = new GymLeader();
 		
 		public void PokeUserLogin () {
 			System.out.println("\nWelcome trainer! Could you please login with your username and password?"
@@ -27,12 +32,20 @@ public class PokeLogin {
 			PokeUsers user = pokeService.loginUsers(username, password);
 			
 			if (user!=null) {
-				System.out.println("\nPerfect! You're signed in!");
+				System.out.println("\nPerfect! You're signed in!\n");
 			} else {
 				System.out.println("\nHmm that seems to be the wrong password and/or username. You might want to try again.\n");
-				PokeUserLogin();
 			}
-				
+			
+//			if (user.getAccountType().equals("Elite Four")) {
+//				 eliteFour.eliteFourMenu();
+//			} else if (user.getAccountType().equals("Champion")) {
+//				champion.championMenu();
+//			} else if (user.getAccountType().equals("Poke Trainer")) {
+//				pokeTrainer.pokeTrainerMenu();
+//			}else if (user.getAccountType().equals("Gym Leader")) {
+//				gymLeader.gymLeaderMenu();
+//			}
 			
 		}
 		

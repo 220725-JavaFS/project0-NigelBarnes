@@ -13,34 +13,36 @@ import com.revature.utils.ConnectionUtil;
 
 public class PokeusersDAOImpl implements PokeUsersDAO{
 
-//	@Override
-//	public PokeUsers getPokeuserByUsername(String username) {
-//		try (Connection conn = ConnectionUtil.getConnection()){
-//			String sq2 = "SELECT * FROM pokeusers WHERE user_name = ?;";
-//			
-//			PreparedStatement statement = conn.prepareStatement(sq2);
-//			
-//			statement.setString(1, username); //Checking for SQL injection
-//			
-//			ResultSet result = statement.executeQuery();
-//			
-//			if(result.next()) {//Cursor based, .next will move to the next. Otherwise will start one before. 
-//				
-//				
-//				int trainerId = result.getInt("trainer_id");
-//				if(trainerId!=0) {
-//					TrainerIdDAO TrainerIdDAO = new TrainerIdDAOImpl();
-//					//TrainerId trainerId = 
-//				}
-//				
-//				//return pokeUsers;
-//			}
-//			
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
+	@Override
+	public PokeUsers getPokeUserbyUsername(String username) {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			String sq2 = "SELECT * FROM pokeusers WHERE user_name = ?;";
+			
+			PreparedStatement statement = conn.prepareStatement(sq2);
+			
+			statement.setString(1, username); //Checking for SQL injection
+			
+			ResultSet result = statement.executeQuery();
+			
+			if(result.next()) {//Cursor based, .next will move to the next. Otherwise will start one before. 
+				  PokeUsers pokeUsers = new PokeUsers(
+						  result.getInt("trainer_id"),
+						  result.getString("user_name"),
+						  result.getInt("pass_word"),
+						  result.getString("account_type"),
+						  result.getDouble("poke_dollars"),
+						  null
+						  );
+				  		System.out.println(pokeUsers);
+				       return pokeUsers;
+				       
+			}
+			
+				}catch(SQLException e) {
+		e.printStackTrace();
+	}
+		return null;
+	}
 	@Override
 	public PokeUsers viewPokedollarsByPokeUsername(String username) {
 		try (Connection conn = ConnectionUtil.getConnection()){
@@ -106,38 +108,6 @@ public class PokeusersDAOImpl implements PokeUsersDAO{
 	 
 		return null;
 	}
-	
-	@Override
-//	public PokeUsers assignPokeUsersAccountType(String username) {
-//		try (Connection conn = ConnectionUtil.getConnection()){
-//			 
-//			 String sq1 = "SELECT * FROM pokeusers WHERE user_name = ?;";
-//			 
-//			 PreparedStatement statement1 = conn.prepareStatement(sq1);
-//			
-//			 statement1.setString(1, username);
-//			 
-//			 ResultSet result = statement1.executeQuery();
-//			 
-//			if (result.next()) {result.next(){
-//				PokeUsers pokeUsers = new PokeUsers(
-//						result.getInt("trainer_id"),
-//						 result.getString("user_name"),
-//						 result.getInt("pass_word"),
-//						 result.getString("account_type"),
-//						 result.getDouble("poke_dollars"),
-//						 null		
-//						);
-//				if (pokeUsers.getAccountType().equals("Elite Four"))
-//			}
-//			
-//			}
-//				
-//			}
-//		
-//		return null;
-//	}
-
 	
 	
 	
@@ -210,48 +180,6 @@ public class PokeusersDAOImpl implements PokeUsersDAO{
 	}
 
 
-	public static void main (String[]args) {
-		PokeusersDAOImpl poke1 = new PokeusersDAOImpl();
-		poke1.viewPokedollarsByPokeUsername("Nekros");
-	}
-
-
-//	@Override
-//	public PokeUsers getPokeUsersAccountType(String username) {
-//		try (Connection conn = ConnectionUtil.getConnection()){
-//			 
-//			 String sq1 = "SELECT * FROM pokeusers WHERE user_name = ?;";
-//			 
-//			 PreparedStatement statement1 = conn.prepareStatement(sq1);
-//			
-//			 statement1.setString(1, username);
-//			 
-//			 ResultSet result = statement1.executeQuery();
-//			 
-//			 if (result.next()) {
-//				 PokeUsers pokeUsers = new PokeUsers(
-//						 result.getInt("trainer_id"),
-//						 result.getString("user_name"),
-//						 result.getInt("pass_word"),
-//						 result.getString("account_type"),
-//						 result.getDouble("poke_dollars"),
-//						 null		 
-//						 );
-//				 String accountType = result.getString("account_type");
-//			
-//				 PokeUsers pokeUser = accountType;
-//				 return accountType;
-//				 
-//			 	}
-//			 
-//		 	}catch(SQLException e) {
-//			 
-//			 e.printStackTrace();
-//		 }
-//		 
-//			return null;
-//		}
-
 
 	@Override
 	public PokeUsers changePokeUsersPassword(String username, int password) {
@@ -271,8 +199,94 @@ public class PokeusersDAOImpl implements PokeUsersDAO{
 		 
 			return null;
 		}
+
+
+	@Override
+	public PokeUsers changePokeDollarsByUsername(String username, double pokeDollars) {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			 
+			 String sq1 = "UPDATE pokeusers SET poke_dollars = "+pokeDollars+" WHERE user_name = ?;";
+			 
+			 PreparedStatement statement1 = conn.prepareStatement(sq1);
+			
+			 statement1.setString(1, username);
+			 statement1.execute();
+			 
+		 	}catch(SQLException e) {
+			 
+			 e.printStackTrace();
+		 }
+		 
+			return null;
+		}
+
+
+	@Override
+	public void depositPokeDollarsByUsername(String username, double deposit) {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			
+			 String sq1 = "SELECT * FROM pokeusers WHERE user_name = ?;";
+			 
+			 PreparedStatement statement1 = conn.prepareStatement(sq1);
+			
+			 statement1.setString(1, username);
+			 
+			 ResultSet result = statement1.executeQuery();
+			
+			if(result.next()) {//Cursor based, .next will move to the next. Otherwise will start one before. 
+		  		PokeUsers pokeUser = new PokeUsers(
+		  				result.getInt("trainer_id"),
+						result.getString("user_name"),
+						result.getInt("pass_word"),
+						result.getString("account_type"),
+						result.getDouble("poke_dollars"),
+						null);
+		  		Double newValue = pokeUser.getPokeDollars() + deposit;
+		  		
+		  		String sq2 = "UPDATE pokeusers SET poke_dollars = " +newValue+ " WHERE user_name = '"+username+"';";
+		  		
+		  		PreparedStatement statement2 = conn.prepareStatement(sq2);
+		  		statement2.execute();
+		  		
+			}
+			
+			
+		  }catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public String getTrainerTypeByUsername(String username) {
+		try (Connection conn = ConnectionUtil.getConnection()){
+			 
+			 String sq1 = "SELECT account_type FROM pokeusers WHERE user_name = ?;";
+			 
+			 PreparedStatement statement1 = conn.prepareStatement(sq1);
+			
+			 statement1.setString(1, username);
+			 
+			 ResultSet result = statement1.executeQuery();
+			 
+			 if (result.next()) {
+				 return result.getString("account_type");
+			 } 
+			 
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 	
+	public static void main (String[]args) {
+		PokeusersDAOImpl poke1 = new PokeusersDAOImpl();
+		poke1.depositPokeDollarsByUsername("Nekros", 503);
+	}
+
 	
 
 }

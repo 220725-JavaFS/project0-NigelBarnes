@@ -20,8 +20,9 @@ public class PokeUsers {
 		this.pokeDollars = pokeDollars;
 		this.pokePersona = pokePersona;
 	}
-	
-	
+
+
+
 	public PokeUsers(double pokeDollars) {
 		super();
 		this.pokeDollars = pokeDollars;
@@ -94,6 +95,7 @@ public class PokeUsers {
 		this.pokePersona = pokePersona;
 	}
 
+	
 
 	@Override
 	public int hashCode() {
